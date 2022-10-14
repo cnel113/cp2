@@ -33,13 +33,51 @@
     
     <div class = "page">
       <h1>Random Color Generator</h1>
-      <div class="color-search">
-        <form>
-          <label>How many colors do you want?</label>
-          <input id="colorAmount" type="text"></input><br/>
-          <input id="amountSubmit" type="submit" value="Get Colors" class='button'></input>
+      <div class="color-search"> <fieldset>
+        <form class = "search-form">
+          <legend>Get a random color, or specify the hue, amount, and whether you want light or dark color(s)</legend>
+          <label>Select a Hue</label>
+          <select id="hue-selector">
+            <option value="random">Random</option>
+            <option value="red">Red</option>
+            <option value="pink">Pink</option>
+            <option value="purple">Purple</option>
+            <option value="navy">Navy</option>
+            <option value="blue">Blue</option>
+            <option value="aqua">Aqua</option>
+            <option value="green">Green</option>
+            <option value="lime">Lime</option>
+            <option value="yellow">Yellow</option>
+            <option value="orange">Orange</option>
+          </select>
+          <label>Number</label>
+          <select id="amount-selector">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+          </select>
+          <label>Light</label>
+          <input type="checkbox" id="light">
+          <label>Dark</label>
+          <input type="checkbox" id="dark">
+
+          <input id="submitButton" type="submit" value="Get Colors" class='button'></input>
+          </fieldset>
         </form>
       </div>
+      
         
         <div id="colorResults">
           <div class='color-block' id='block-1'></div>

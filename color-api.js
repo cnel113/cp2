@@ -1,15 +1,40 @@
-document.getElementById("amountSubmit").addEventListener("click", function(event) {
+document.getElementById("submitButton").addEventListener("click", function(event) {
     event.preventDefault();
-    const value = document.getElementById("colorAmount").value;
-    if (value == "")
-        return;
-    console.log(value);
-    const url ="https://x-colors.herokuapp.com/api/random";
+    let colorField = document.getElementById('hue-selector');
+    let selectedHue = colorField.options[colorField.selectedIndex].value;
+    let amountField = document.getElementById('amount-selector');
+    let numColors = amountField.options[amountField.selectedIndex].value; //watch for issues with it being a number not a string, might have to define it
+    let light = document.getElementById('light').checked;
+    let dark = document.getElementById('dark').checked;
+    
+    let url ="https://x-colors.herokuapp.com/api/random";
+    
+    if (selectedHue != "random") {
+        url += "/" + selectedHue;
+    }
+    
+    if (light === true && dark === false) {
+        url += "?type=light";
+    }
+    else if (light === false && dark === true) {
+        url += "?type=dark";
+    }
+    
+    if (numColors > 1) {
+        url += "&number=" + numColors;
+    }
+    
+        
+    
     fetch(url) 
     .then(function(response) {
         return response.json();
     }).then(function(json) {
         console.log(json);
+        
+        for (let i = 0; i < numColors; i++){
+        
+        }
         //let results = "";
         let color = json.hex;
         //const element =  document.querySelector('color-block');
