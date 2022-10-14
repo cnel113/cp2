@@ -12,36 +12,42 @@ document.getElementById("submitButton").addEventListener("click", function(event
     if (selectedHue != "random") {
         url += "/" + selectedHue;
     }
+    url += "?number=" + numColors;
     
     if (light === true && dark === false) {
-        url += "?type=light";
+        url += "&type=light";
     }
     else if (light === false && dark === true) {
-        url += "?type=dark";
+        url += "&type=dark";
     }
-    
-    if (numColors > 1) {
-        url += "&number=" + numColors;
-    }
-    
-        
     
     fetch(url) 
     .then(function(response) {
         return response.json();
     }).then(function(json) {
         console.log(json);
+        const box = document.getElementById('colorResults');
         
-        for (let i = 0; i < numColors; i++){
-        
+        //let html = "";
+        for (let i = 1; i <= numColors; i++){
+            if (i === 1){
+                let color = json.hex;
+                const element = document.getElementById("block-1");
+                element.style.backgroundColor = color;
+            }
+            else {
+                let color = json[i].hex;
+                let el = document.createElement('div');
+                el.classList.add('color-block');
+                el.style.backgroundColor = color;
+                box.appendChild(el);
+            }
         }
         //let results = "";
-        let color = json.hex;
         //const element =  document.querySelector('color-block');
         /*results += '<div class="color-block"><div>';*/
         //element.style.backgroundColor = color;
-        const element = document.getElementById("block-1");
-        element.style.backgroundColor = color;
+        
         /*results += '<div class="current-secondary-results">'; 
         results += '<p> <b>' + json.clouds.all + '%</b> cloudy</p>'
         results += '<p> <b>' + json.main.humidity + '%</b> humidity</p>'
