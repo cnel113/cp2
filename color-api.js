@@ -3,7 +3,7 @@ document.getElementById("submitButton").addEventListener("click", function(event
     let colorField = document.getElementById('hue-selector');
     let selectedHue = colorField.options[colorField.selectedIndex].value;
     let amountField = document.getElementById('amount-selector');
-    let numColors = amountField.options[amountField.selectedIndex].value; //watch for issues with it being a number not a string, might have to define it
+    let numColors = amountField.options[amountField.selectedIndex].value;
     let light = document.getElementById('light').checked;
     let dark = document.getElementById('dark').checked;
     
@@ -20,10 +20,10 @@ document.getElementById("submitButton").addEventListener("click", function(event
     }
     url += "?number=" + numColors;
     
-    if (light === true && dark === false) { //doesn't work with random as hue
+    if (light === true && dark === false) {
         url += "&type=light";
     }
-    else if (light === false && dark === true) { //doesn't work with random as hue
+    else if (light === false && dark === true) {
         url += "&type=dark";
     }
     
