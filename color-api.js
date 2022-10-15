@@ -15,6 +15,9 @@ document.getElementById("submitButton").addEventListener("click", function(event
     if (selectedHue != "random") {
         url += "/" + selectedHue;
     }
+    else {
+        url += "/all";
+    }
     url += "?number=" + numColors;
     
     if (light === true && dark === false) { //doesn't work with random as hue
@@ -37,10 +40,16 @@ document.getElementById("submitButton").addEventListener("click", function(event
                 else {
                     color = json[i].hex;
                 }
+                let chip = document.createElement('div');
+                chip.classList.add('color-chip');
                 let el = document.createElement('div');
                 el.classList.add('color-block');
                 el.style.backgroundColor = color;
-                box.appendChild(el);
+                chip.appendChild(el);
+                let text = document.createElement('p');
+                text.innerHTML = color;
+                chip.appendChild(text);
+                box.appendChild(chip);
             }
         });
             
