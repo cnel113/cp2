@@ -7,6 +7,9 @@ document.getElementById("submitButton").addEventListener("click", function(event
     let light = document.getElementById('light').checked;
     let dark = document.getElementById('dark').checked;
     
+    const box = document.getElementById('colorResults');
+    box.innerHTML = ""; 
+    
     let url ="https://x-colors.herokuapp.com/api/random";
     
     if (selectedHue != "random") {
@@ -14,10 +17,10 @@ document.getElementById("submitButton").addEventListener("click", function(event
     }
     url += "?number=" + numColors;
     
-    if (light === true && dark === false) {
+    if (light === true && dark === false) { //doesn't work with random as hue
         url += "&type=light";
     }
-    else if (light === false && dark === true) {
+    else if (light === false && dark === true) { //doesn't work with random as hue
         url += "&type=dark";
     }
     
@@ -26,41 +29,21 @@ document.getElementById("submitButton").addEventListener("click", function(event
         return response.json();
     }).then(function(json) {
         console.log(json);
-        const box = document.getElementById('colorResults');
-        
-        //let html = "";
-        for (let i = 1; i <= numColors; i++){
-            if (i === 1){
-                let color = json.hex;
-                const element = document.getElementById("block-1");
-                element.style.backgroundColor = color;
-            }
-            else {
-                let color = json[i].hex;
+            for (let i = 0; i < numColors; i++){
+                let color = ""
+                if (numColors === "1") {
+                    color = json.hex;
+                }
+                else {
+                    color = json[i].hex;
+                }
                 let el = document.createElement('div');
                 el.classList.add('color-block');
                 el.style.backgroundColor = color;
                 box.appendChild(el);
             }
-        }
-        //let results = "";
-        //const element =  document.querySelector('color-block');
-        /*results += '<div class="color-block"><div>';*/
-        //element.style.backgroundColor = color;
-        
-        /*results += '<div class="current-secondary-results">'; 
-        results += '<p> <b>' + json.clouds.all + '%</b> cloudy</p>'
-        results += '<p> <b>' + json.main.humidity + '%</b> humidity</p>'
-        results += '<p> <b>' + json.main.pressure + '</b> pressure</p>'
-        results += '<p> <b>' + json.wind.speed + '</b> mph wind</p>'
-        results += '<p> Feels like <b>' + json.main.feels_like + "</b> &deg;F</p>"
-        results += '</div>'
-        */
-        
-        //document.getElementById("colorResults").innerHTML = results;
         });
             
-        //document.getElementById("").innerHTML = "";
     });
 
 
